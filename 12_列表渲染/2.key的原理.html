@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key的原理</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 
+            :key虚拟DOM对比
+
+            开发中如何让选择key?
+                1.最好使用每条数据的唯一标识作为key，比如id、手机号、身份证号、学号等唯一值
+                2.如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，
+                  使用index作为key没有问题
+         -->
+        <h2>人员列表</h2>
+        <button @click.once="add">添加一个老刘</button>
+        <ul>
+            <li v-for="(p,index) in persons" :key="p.id">
+                {{p.name}}-{{p.age}}
+                <input type="text">
+            </li>
+        </ul>
+    </div>
+</body>
+
+
+
+<script>
+    new Vue({
+        el:'#root',
+        data:{
+            persons:[
+                {id:'001',name:'张三',age:'18'},
+                {id:'002',name:'李四',age:'19'},
+                {id:'003',name:'王五',age:'20'}
+            ]
+        },
+        methods: {
+            add(){
+                const p = {id:'004',name:'老刘',age:40}
+                this.persons.unshift(p)
+            },
+        },
+    })
+</script>
+</html>

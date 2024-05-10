@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解MVVM</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>学校名称：{{name}}</h1>
+        <h1>学校地址：{{address}}</h1>
+        <!-- vm里有的都可以用 -->
+        <h1>测试一下1：{{1+1}}</h1>
+        <h1>测试一下2：{{$options}}</h1>
+        <h1>测试一下3：{{$emit}}</h1>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data:{  //这些数据都会出现在打印的vm实例里
+            name:'lsb',
+            address:'kunshan',
+            a:1
+        }
+    })
+    console.log(vm);
+</script>
+</html>

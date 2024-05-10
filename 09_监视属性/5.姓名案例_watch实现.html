@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例_watch实现</title>
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+    计算属性简写：
+        当你确定了只读取计算属性不修改，则可以使用简写形式
+ -->
+<body>
+    <div id="root">
+        名：<input type="text" v-model="firstName"><br><br>
+        姓：<input type="text" v-model="lastName"><br><br>
+        全名：<span>{{fullName}}</span><br><br>
+    </div>
+</body>
+
+
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            firstName:'张',
+            lastName:'三',
+            fullName:'张-三'
+        },
+        watch:{
+            firstName(newValue,oldValue){
+                // 此处箭头函数内调用js的方法，即window的方法，并非Vue所管理的函数，故指向外层作用域的this，即指向了Vue
+                // 异步计算用watch，计算属性return返回值不能进行异步计算
+                // 重要小原则：若遇到内层非Vue管理的方法（比如定时器的回调函数，ajax的回调函数等，Promise的回调函数），最好写成箭头函数
+                setTimeout(() => {
+                    console.log(this);
+                    this.fullName = newValue + '-' + this.lastName
+                }, 1000);
+            },
+            lastName(newval,oldval){
+                this.fullName = this.firstName + '-' + newval
+            }
+        }
+
+    })
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例_计算属性实现</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        计算属性：
+            与methods相比优势：内部有缓存机制（复用），效率更高，测试方便
+
+            定义：要通过已有属性计算得来
+
+            计算属性最终会出现在vm上，直接读取使用即可
+            若要修改计算属性，必须写set函数响应修改，且set中要引起计算时依赖的数据发生变化
+     -->
+    <div id="root">
+        名：<input type="text" v-model="firstName"><br><br>
+        姓：<input type="text" v-model="lastName"><br><br>
+        全名：<span>{{fullName}}</span><br><br>
+        全名：<span>{{fullName}}</span><br><br>
+        全名：<span>{{fullName}}</span><br><br>
+        全名：<span>{{fullName}}</span>
+    </div>
+</body>
+
+
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            firstName:'张',
+            lastName:'三'
+        },
+        // 计算属性，有可能比较复杂，它把整个计算属性配置为了一个对象，故用{}
+        computed:{
+            fullName:{
+                // get有什么用？当有人读取fullName时，get就会被调用，且返回值作为fullName的值
+                // get什么时候被调用？1.初次读取fullName时 2.所依赖的数据发生变化时
+                get(){
+                    console.log('get被调用了');
+                    // console.log(this) //此处的this指向的是vm
+                    return this.firstName + '-' + this.lastName
+                },
+                //set什么时候调用？当fullName被修改
+                set(value){
+                    console.log('set',value);
+                    const arr = value.split('-') //.split按照指定字符拆成数组
+                    this.firstName = arr[0]
+                    this.lastName = arr[1]
+                }
+
+            } 
+            
+        }
+    })
+</script>
+</html>
