@@ -62,7 +62,7 @@
         computed: {
             filPersons(){
                 return this.persons.filter((p)=>{
-                    return p.name.indexOf(this.keyWord) !== -1
+                    return p.name.indexOf(this.keyWord) !== -1  //模糊查询name中的名字
                 })
             }
         },
