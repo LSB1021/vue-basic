@@ -48,6 +48,8 @@
                     arr.sort((a,b)=>{ // 此处a,b代表前后两个工具箱
                         return this.sortType === 1 ? b.age-a.age : a.age-b.age
                     })
+
+                    //上为sort方法样板   ab为sort用于比较的两个相邻参数
                 }
                 return arr
             }
