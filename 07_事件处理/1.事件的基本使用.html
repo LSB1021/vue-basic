@@ -11,7 +11,7 @@
         <h2>欢迎{{name}}学习</h2>
         <!-- <button v-on:click="showInfo">点我提示信息</button> -->
         <button @click="showInfo1">点我提示信息1（不传参）</button>
-        <button @click="showInfo2(66,$event)">点我提示信息2（传参）</button>
+        <button @click="showInfo2(66,$event)">点我提示信息2（传参）</button> <!--此中的$event为获取该事件的事件对象-->
     </div>
 </body>
 
@@ -32,6 +32,11 @@
             showInfo2(number,a){
                 console.log(number,a);
                 // console.log(event.target.innerText);
+                /* 在触发DOM上的事件都会产生一个对象，即事件对象（也称event对象），
+                    这里用event接收事件对象。事件对象有很多属性和方法，
+                    此处的target属性是获取事件目标，即元素DOM对象，然后获取其相应的属性,比如点击事件，
+                    e.target就是鼠标点击的对象的父元素，innerHTML就是里面的text内容。 */
+                    
                 // alert('同学你好!!')
             },
         }
